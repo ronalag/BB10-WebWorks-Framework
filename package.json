@@ -24,10 +24,10 @@
     "argsparser"
   ],
   "files": [
-    "node_modules",
     "README.md",
     "LICENSE",
-    "lib",
+    "server",
+    "framework",
     "bin/bbx-framework"
   ]
 }

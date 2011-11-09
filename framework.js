@@ -1,4 +1,4 @@
-var webview = require('../dependencies/BBX-Emulator/lib/webview');
+var webview = require('bbx-emulator/lib/webview');
 
 var _self = {
     startWebview: function (url) {

@@ -1,8 +1,6 @@
-var srcPath = __dirname + '/../../lib/';
-
 describe("framework", function () {
-    var framework = require(srcPath + 'framework'),
-        webview = require('../../dependencies/BBX-Emulator/lib/webview.js'),
+    var framework = require("bbx-framework/framework"),
+        webview = require('bbx-emulator/lib/webview'),
         emulator_webview;
 
     beforeEach(function () {

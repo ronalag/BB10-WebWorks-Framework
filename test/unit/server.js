@@ -1,6 +1,6 @@
 describe("server", function () {
     var express = require('express'),
-        server = require('../../lib/server'),
+        server = require('bbx-framework/server'),
         app = {
             configure: jasmine.createSpy(),
             post: jasmine.createSpy(),
@@ -68,7 +68,7 @@ describe("server", function () {
         });
         
         it("calls the action method on the plugin", function () {
-            var plugin = require("../../lib/plugins/example");
+            var plugin = require("bbx-framework/server/plugins/example");
 
             spyOn(plugin, "win");
 
@@ -80,7 +80,7 @@ describe("server", function () {
         });
 
         it("returns the result and code 1 when success callback called", function () {
-            var plugin = require("../../lib/plugins/example");
+            var plugin = require("bbx-framework/server/plugins/example");
 
             spyOn(plugin, "win").andCallFake(function (success) {
                 success("return!");
@@ -97,7 +97,7 @@ describe("server", function () {
         });
 
         it("returns the result and code -1 when fail callback called", function () {
-            var plugin = require("../../lib/plugins/example");
+            var plugin = require("bbx-framework/server/plugins/example");
 
             spyOn(plugin, "win").andCallFake(function (success, fail) {
                 fail("omg");

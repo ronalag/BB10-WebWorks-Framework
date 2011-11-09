@@ -17,7 +17,7 @@ module.exports = {
 
     handle: function (req, res) {
         try {
-            var plugin = require("./plugins/" + req.params.service);
+            var plugin = require("bbx-framework/server/plugins/" + req.params.service);
 
             plugin[req.params.action](function (result) {
                 res.send({
