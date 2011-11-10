@@ -42,12 +42,13 @@ For Windows:
 
 6. git checkout next
 
-7. Run configure.bat 
-    (If you have trouble with npm install express, get it from here: 
-        git clone http://git.rim.net/rcruz/BBX-Framework.git )
+7. Download junction from here: http://technet.microsoft.com/en-us/sysinternals/bb896768
+   Place it in C:\Windows\system32
 
 8. Open git shell, navigate to BBX-Framework and run:
     git submodule update --init
 
-9. Run the unit tests:
+9. Run configure.bat     
+
+10. Run the unit tests:
     jake test
