@@ -7,15 +7,24 @@ describe("blackberry.event", function() {
    ppsUtils.init();
 
    function setBatteryLevel(level) {
-      //to be defined
+      var ctrlObj = {
+         'id': "",
+         'dat' : "StateOfCharge::" + level,
+         'msg' : ""
+      };
       ppsUtils.open("/pps/services/power/battery?wait,delta", 2);
-      ppsUtils.write("StateOfCharge::" + level );
+      ppsUtils.write(ctrlObj);
    }
 
    function setBatteryCharge(isPlugged) {
-      // to be defined
+      var ctrlObj = {
+         'id': "",
+         /* Not sure about the DC value*/
+         'dat' : "ChargingState::" + (isPlugged ? "DC" : "NC") ,
+         'msg' : ""
+      };
       ppsUtile.open("/pps/services/power/charger?wait,delta", 2);
-      ppsUtils.write( isPlugged ? "ChargingState::" : "ChargingState::NC" );
+      ppsUtils.write(ctrlObj);
    }
 
    it("should be defined", function () {
