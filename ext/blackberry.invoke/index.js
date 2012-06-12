@@ -17,7 +17,8 @@
 var APP_URL_BROWSER = "http://",
     APP_TYPE_ERROR = "The application specified to invoke is not supported.",
     APP_TYPE_ERROR_ID = -1,
-    APP_BROWSER_ERROR = "Please specify a fully qualified URL that starts with either the 'http://' or 'https://' protocol.";
+    APP_BROWSER_ERROR = "Please specify a fully qualified URL that starts with either the 'http://' or 'https://' protocol.",
+    _event = require("../../lib/event");
 
 module.exports = {
     invoke: function (success, fail, args) {
@@ -88,5 +89,50 @@ module.exports = {
         qnx.callExtensionMethod("navigator.invoke", url);
         
         success();
+    },
+    query: function (success, fail, args) {
+        console.log("query call on server side");
+        var argReq,
+            expectedParams = [
+                "action",
+                "type",
+                "id",
+                "uri",
+                "target-type",
+                "action_type",
+                "brokering_mod"
+            ],
+            request = {
+                "target-type": "ALL",
+                "action-type": "ALL"
+            },
+            callback;
+
+        if (args) {
+            argReq = JSON.parse(decodeURIComponent(args["request"]));
+            console.log(JSON.stringify(argReq));
+            
+            callback = function (error, response) {
+                var responseArgs = {"error": error, "response": response};
+                _event.trigger("blackberry.invoke.queryEventId", responseArgs);
+            };
+
+            expectedParams.forEach(function (key) {
+                var val = argReq[key];
+
+                if (val) {
+                    request[key] = val;
+                }
+            });
+
+            console.log("request: " + JSON.stringify(request));
+
+            window.qnx.webplatform.getApplication().invocation.queryTargets(request, callback);
+
+            console.log("request sent");
+        } else {
+            console.log("request undefined");
+        }
+
     }
 };

@@ -15,7 +15,8 @@
  */
 
 var _self = {},
-    _ID = "blackberry.invoke";
+    _ID = "blackberry.invoke",
+    _queryEventId = "blackberry.invoke.queryEventId";
 
 _self.invoke = function (appType, args) {
     return window.webworks.execAsync(_ID, "invoke", {
@@ -28,6 +29,24 @@ _self.BrowserArguments = function (url) {
     this.url = url;
 };
 
+_self.query = function (request, callback) {
+    if (request) {
+        var queryCallback = function (args) {
+            callback(args.error, args.response);
+        };
+
+        if (callback && typeof callback === "function") {
+            if (!window.webworks.event.isOn(_queryEventId)) {
+                window.webworks.event.once(_ID, _queryEventId, queryCallback);
+            }
+        }
+
+        window.webworks.execAsync(_ID, "query", {request: request});
+    } else {
+        throw "invalid invocation query";
+    }
+
+};
 /*
  * Define constants for appType
  */
