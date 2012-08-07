@@ -62,4 +62,14 @@ describe("Utils", function () {
     it("Verify that the proper SVG MIME types are returned", function () {
         expect(utils.fileNameToImageMIME("test.svg")).toEqual("image/svg+xml");
     });
+
+    it("validate number of arguments", function () {
+        utils.validateNumberOfArguments(3, "b", 5, 1, 2);
+
+        expect(utils.validateNumberOfArguments).toThrow( {
+            type: "ArgumentType",
+            message: "(validateNumberOfArguments) Arguments are not numbers",
+            toString: jasmine.any(Function)
+        });
+    });
 });
