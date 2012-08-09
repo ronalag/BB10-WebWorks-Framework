@@ -82,11 +82,12 @@ _self.query = function (request, onSuccess, onError) {
 
     window.webworks.execAsync(_ID, "query", {request: request});
 };
-
 _self.closeChildCard = function () {
     window.webworks.execSync(_ID, "closeChildCard");
 };
-
+window.webworks.defineReadOnlyField(_self, "APPLICATION", 1);
+window.webworks.defineReadOnlyField(_self, "CARD", 2);
+window.webworks.defineReadOnlyField(_self, "VIEWER", 4);
 window.webworks.execSync(_ID, "registerEvents", null);
 
 module.exports = _self;

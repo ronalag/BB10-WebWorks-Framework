@@ -27,7 +27,7 @@ var _extDir = __dirname + "./../../../../ext",
         }
     };
 
-describe("invoke client", function () {
+xdescribe("invoke client", function () {
     beforeEach(function () {
         GLOBAL.window = GLOBAL;
         GLOBAL.window.btoa = jasmine.createSpy("window.btoa").andReturn("base64 string");
@@ -41,7 +41,7 @@ describe("invoke client", function () {
         client = null;
     });
 
-    describe("invoke", function () {
+    xdescribe("invoke", function () {
 
         it("should call error callback if request is not valid", function () {
             var onError = jasmine.createSpy("client onError");
@@ -119,7 +119,7 @@ describe("invoke client", function () {
         });
     });
 
-    describe("query", function () {
+    xdescribe("query", function () {
 
         beforeEach(function () {
             mockedWebworks.event.once.andCallFake(function (id, eventId, func) {
@@ -155,7 +155,7 @@ describe("invoke client", function () {
             var request = {
                     "action": "bb.action.OPEN",
                     "type": "image/*",
-                    "target_type": "ALL"
+                    "target_type": ["APPLICATION", "CARD", "VIEWER"]
                 },
                 onSuccess = jasmine.createSpy("client onSuccess"),
                 onError = jasmine.createSpy("client onError");
@@ -169,7 +169,7 @@ describe("invoke client", function () {
             var request = {
                     "action": "bb.action.OPEN",
                     "type": "image/*",
-                    "target_type": "ALL"
+                    "target_type": ["APPLICATION"]
                 },
                 onSuccess = jasmine.createSpy("client onSuccess"),
                 onError = jasmine.createSpy("client onError");
@@ -183,7 +183,7 @@ describe("invoke client", function () {
         it("should trigger error callback if the invocation is unsuccessfull", function () {
             var request = {
                     "action": "bb.action.OPEN",
-                    "target_type": "ALL"
+                    "target_type": ["APPLICATION"]
                 },
                 onSuccess = jasmine.createSpy("client onSuccess"),
                 onError = jasmine.createSpy("client onError");
